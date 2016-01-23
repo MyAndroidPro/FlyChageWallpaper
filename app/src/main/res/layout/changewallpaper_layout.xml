@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xu.ferris.flymeshview.ChangeWallpaperView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <xu.ferris.flymeshview.TouchDisableView
+        android:id="@+id/mTouchDisableView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</xu.ferris.flymeshview.ChangeWallpaperView>

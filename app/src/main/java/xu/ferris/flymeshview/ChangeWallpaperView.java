@@ -15,7 +15,7 @@ import android.widget.ImageView;
  * Created by ferris on 2016/1/23.
  */
 public class ChangeWallpaperView extends FrameLayout {
-    private static final int DURATION_DEFAULT = 2000;
+    private static final int DURATION_DEFAULT = 2500;
     public static final int DIRECTION_LEFT = 0;
     public static final int DIRECTION_RIGHT = 1;
     private TouchDisableView viewActivity;
@@ -42,18 +42,66 @@ public class ChangeWallpaperView extends FrameLayout {
     public void openMenu(int direction) {
         setScaleDirection(direction);
         isOpened = true;
-
+        viewActivity.animate().alpha(1f).setDuration(1500).setStartDelay(1000).start();
         ObjectAnimator animator = ObjectAnimator.ofFloat(viewActivity, "FolderX",0f,1f);
-        animator.addListener(openAnimatorListener);
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                closeMenu(DIRECTION_LEFT);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
         animator.setDuration(mDuration);
         animator.start();
-
-//        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(scrollViewMenu, "alpha", scrollViewMenu.getAlpha(), 1f);
-//        alphaAnimator.setDuration(500);
-//        alphaAnimator.start();
     }
 
 
+    /**
+     * Show the menu;
+     */
+    public void closeMenu(int direction) {
+        setScaleDirection(direction);
+        isOpened = true;
+        viewActivity.animate().alpha(0f).setDuration(1000).setStartDelay(1000).start();
+        ObjectAnimator animator = ObjectAnimator.ofFloat(viewActivity, "FolderX",1f,0f);
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator.setDuration(mDuration);
+        animator.start();
+    }
     private void setScaleDirection(int direction) {
 
         viewActivity.setDirection(direction);
@@ -64,6 +112,7 @@ public class ChangeWallpaperView extends FrameLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         viewActivity= (TouchDisableView) findViewById(R.id.mTouchDisableView);
+        viewActivity.setAlpha(0f);
         ImageView mContent=new ImageView(getContext());
         mContent.setImageResource(R.drawable.default_wallpaper);
         mContent.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -79,53 +128,8 @@ public class ChangeWallpaperView extends FrameLayout {
         },500);
     }
 
-    public int getScreenHeight() {
-        return getMeasuredHeight();
-    }
-
-    public int getScreenWidth() {
-        return getMeasuredWidth();
-    }
 
 
-    private Animator.AnimatorListener openAnimatorListener = new Animator.AnimatorListener() {
-        @Override
-        public void onAnimationStart(Animator animator) {
-            viewActivity.setTouchDisable(false);
-            if (isOpened) {
-//                showScrollViewMenu(scrollViewMenu);
-//                if (menuListener != null)
-//                    menuListener.openMenu();
-            }
 
-        }
-
-        @Override
-        public void onAnimationEnd(Animator animator) {
-            if (isOpened) {
-                viewActivity.setTouchDisable(true);
-                viewActivity.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-
-            } else {
-                viewActivity.setTouchDisable(false);
-                viewActivity.setOnClickListener(null);
-
-            }
-        }
-
-        @Override
-        public void onAnimationCancel(Animator animator) {
-        }
-
-        @Override
-        public void onAnimationRepeat(Animator animator) {
-
-        }
-    };
 
 }

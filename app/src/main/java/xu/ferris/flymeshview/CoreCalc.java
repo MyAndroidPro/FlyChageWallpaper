@@ -105,7 +105,7 @@ public class CoreCalc {
             for (int j = 0; j < 51; j++) {
                 if (mDirection == TouchDisableView.DIRECTION_RIGHT) {
                     meshVerts[i * 102 + 2 * j] = meshVerts[i * 102 + 2 * j]
-                            * (0.4f + 0.6f * offset * offset * offset * offset);
+                            * (0.1f + 0.9f * offset * offset * offset * offset);
 
                     meshVerts[i * 102 + 2 * j] = meshVerts[i * 102 + 2 * j]
                             * (1 + (1 - curveFactor) *
@@ -114,7 +114,7 @@ public class CoreCalc {
                             / 5000 / width / curveFactor);
                 } else {
                     meshVerts[i * 102 + 2 * j] = width - (width - meshVerts[i * 102 + 2 * j])
-                            * (0.4f + 0.6f * offset * offset * offset * offset);
+                            * (0.1f + 0.9f * offset * offset * offset * offset);
 
                     meshVerts[i * 102 + 2 * j] = width - (width - meshVerts[i * 102 + 2 * j])
                             * (1 + (1 - curveFactor) *

@@ -43,7 +43,7 @@ public class ChangeWallpaperView extends FrameLayout {
         setScaleDirection(direction);
         isOpened = true;
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(viewActivity, "FolderX",1f,0f);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(viewActivity, "FolderX",0f,1f);
         animator.addListener(openAnimatorListener);
         animator.setDuration(mDuration);
         animator.start();
@@ -74,7 +74,7 @@ public class ChangeWallpaperView extends FrameLayout {
         postDelayed(new Runnable() {
             @Override
             public void run() {
-                openMenu(DIRECTION_LEFT);
+                openMenu(DIRECTION_RIGHT);
             }
         },500);
     }

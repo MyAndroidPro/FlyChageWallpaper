@@ -2,9 +2,9 @@ package xu.ferris.flymeshview;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -76,7 +76,7 @@ public class ChangeWallpaperView extends FrameLayout {
     public void closeMenu(int direction) {
         setScaleDirection(direction);
         isOpened = true;
-        viewActivity.animate().alpha(0f).setDuration(1000).setStartDelay(1000).start();
+        viewActivity.animate().alpha(0f).setDuration(500).setStartDelay(1000).start();
         ObjectAnimator animator = ObjectAnimator.ofFloat(viewActivity, "FolderX",1f,0f);
         animator.addListener(new Animator.AnimatorListener() {
             @Override
@@ -86,7 +86,7 @@ public class ChangeWallpaperView extends FrameLayout {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-
+                ((Activity)getContext()).finish();
             }
 
             @Override
@@ -114,7 +114,7 @@ public class ChangeWallpaperView extends FrameLayout {
         viewActivity= (TouchDisableView) findViewById(R.id.mTouchDisableView);
         viewActivity.setAlpha(0f);
         ImageView mContent=new ImageView(getContext());
-        mContent.setImageResource(R.drawable.default_wallpaper);
+        mContent.setImageResource(R.drawable.oneclcik_wallpaper_bg);
         mContent.setScaleType(ImageView.ScaleType.FIT_XY);
         ViewGroup.LayoutParams lp=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
         mContent.setLayoutParams(lp);
